@@ -25,5 +25,5 @@ This application is confined to Virginia tech students. VT students excel in a l
 [link_reference_2]: https://github.com/Akshay-06
 [link_reference_3]: https://github.com/samhithapentaparthy
 [link_reference_4]: https://github.com/Sushk1821
-[link_reference_5]: htpps://github.com
+[link_reference_5]: https://github.com/siva-sagar
 [link_reference_6]: https://github.com/charan0675
