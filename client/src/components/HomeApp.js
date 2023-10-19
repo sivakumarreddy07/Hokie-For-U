@@ -34,7 +34,7 @@ const HomeApp = () => {
     <div className='app-home'>
       <div className="parallax-bg" style={parallaxStyle}>
         <p>Connecting Hokies with communities ,Creating Change</p>
-        <button className='cta-button'><Link to="/register">Join Us</Link></button></div>
+        <button className='cta-button'><Link to="/hokieforu/register">Join Us</Link></button></div>
       <div className='app-intro'>
         <div className='story1'>
         <img data-aos="fade-right" src='images/story1.jpeg' alt='story1' className='story-image' data-aos-offset="100" data-aos-duration="500" data-aos-delay="300"/>
@@ -79,9 +79,9 @@ const HomeApp = () => {
             <div class="footer-col">
               <h4>Related Links</h4>
               <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/hokieforu">Home</Link></li>
+                <li><Link to="/hokieforu/register">Register</Link></li>
+                <li><Link to="/hokieforu/login">Login</Link></li>
               </ul>
             </div>
             <div class="footer-col">
