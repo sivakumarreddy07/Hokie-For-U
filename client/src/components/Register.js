@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import '../css/Register.css';
-import {Link,useNavigate} from "react-router-dom";
-
-import {useGoogleLogin} from '@react-oauth/google';
-import {useDispatch} from 'react-redux';
-import {signup, signupGoogle} from "../redux/actions/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useGoogleLogin } from '@react-oauth/google';
+import { useDispatch } from 'react-redux';
+import { signup, signupGoogle } from "../redux/actions/auth";
+import AuthGuard1 from "./AuthGuard1";
 
 
 
@@ -12,7 +12,7 @@ const InitState = {
     firstName: "",
     lastName: "",
     email: '',
-    phone:'',
+    phoneNumber: '',
     password: '',
     confirmPassword: ''
 }
@@ -30,26 +30,23 @@ const Register = () => {
     });
 
     function handleGoogleLoginSuccess(tokenResponse) {
-
         const accessToken = tokenResponse.access_token;
-
-        dispatch(signupGoogle(accessToken,nagivate))
+        dispatch(signupGoogle(accessToken, nagivate))
     }
 
     function handleOnSubmit(e) {
         e.preventDefault();
-        if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phone!=="" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
-            dispatch(signup(sForm,nagivate))
+        if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
+            dispatch(signup(sForm, nagivate))
         }
     }
 
-    const login = useGoogleLogin({onSuccess: handleGoogleLoginSuccess});
+    const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
     return (
-
         <div className='register'>
             <div className="app-register">
                 <div className='registerImage'>
-                    <img src='/images/registerImage.jpeg' alt='logo'/>
+                    <img src='/images/registerImage.jpeg' alt='logo' />
                 </div>
                 <div className='registerForm'>
                     <div className="title">Registration</div>
@@ -70,7 +67,7 @@ const Register = () => {
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Phone Number</span>
-                                    <input type='tel' name='phone' onChange={handleChange} placeholder="Enter your number" required />
+                                    <input type='tel' name='phoneNumber'  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={handleChange} placeholder="Enter your number" required />
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Password</span>
@@ -89,10 +86,9 @@ const Register = () => {
                             </div>
                             <span>or</span>
                             <div className="social-container-register">
-                            Sign in with
-                                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                                <Link onClick={() => login()}  class="social"><i class="fab fa-google-plus-g"></i></Link>
-                                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                <button type="button" class="register-with-google-btn" onClick={() => login()} >
+                                    Sign in with Google
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -102,4 +98,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default AuthGuard1(Register);

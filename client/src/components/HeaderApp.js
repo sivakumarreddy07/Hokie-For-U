@@ -3,31 +3,18 @@ import '../css/HeaderApp.css';
 import "@fontsource/luckiest-guy";
 import { useEffect, useState } from 'react';
 import { Link , useLocation} from 'react-router-dom';
-import { connect } from "react-redux"
-import { useDispatch } from "react-redux"
-import { LOGOUT } from "../redux/const/actionTypes"
-import { useNavigate } from "react-router-dom";
 
 const HeaderApp = ({authenticated, handleLogOut}) => {
 
-  //const dispatch = useDispatch();
-  //const navigate = useNavigate();
-  //const [authenticated, setAuthenticated] = useState(false)
 
   const [color, setColor] = useState('transparent');
   const height = window.innerHeight;
   const location = useLocation();
 
   // Determine whether the current route is the home page
-  const isHomePage = location.pathname === '/hokieforu';
-  //const headerClass = isHomePage ? 'app-header' : 'header2';
+  const isHomePage = location.pathname === '/hokieforu' ;
   useEffect(() => {
-    /*const localUser = JSON.parse(localStorage.getItem("user_info"));
-    if (localUser) {
-      setAuthenticated(true)
-    } else {
-      setAuthenticated(false)
-    }*/
+   
     const handleScroll = () => {
       // Check if the scroll position is greater than 200 pixels
       const newColor = window.scrollY > height - 200 ? '#861f41' : 'transparent';
@@ -36,7 +23,6 @@ const HeaderApp = ({authenticated, handleLogOut}) => {
       setColor(newColor);
     };
 
-    console.log(authenticated)
     // Attach the scroll event listener when the component mounts
     window.addEventListener('scroll', handleScroll);
 
@@ -46,13 +32,7 @@ const HeaderApp = ({authenticated, handleLogOut}) => {
     };
   }, []); // Empty dependency array ensures that this effect runs only once
 
-  /*
-  function handleLogOut(e) {
-    e.preventDefault()
-    navigate("/hokieforu");
-    dispatch({ type: LOGOUT })
-    
-  }*/
+  
 
   return (
     <div className='app-header' style={isHomePage ? { backgroundColor: `${color}` } : { backgroundColor: '#861f41' }}>

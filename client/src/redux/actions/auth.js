@@ -1,4 +1,4 @@
-import {AUTH} from "../const/actionTypes"
+import {AUTH, EMAIL, PASSWORD, REGISTER} from "../const/actionTypes"
 import * as api from "../../api/index"
 
 
@@ -38,7 +38,7 @@ export const signup = (formData, navigate) => async (dispatch)=>{
         // signup user
         const {data} = await api.signUp(formData)
 
-        dispatch({type : AUTH, data})
+        dispatch({type: REGISTER, data})
         navigate("/hokieforu/login")
     }catch(err){
         console.log(err)
@@ -55,5 +55,26 @@ export const signupGoogle = (accessToken, navigate) => async (dispatch)=>{
         navigate("/hokieforu/account/home")
     }catch(err){
         console.log(err)
+    }
+}
+
+
+export const sendEmail = (email, navigate) => async (dispatch)=> {
+    try {
+        const {data} = await api.sendEmail(email);
+        dispatch({type: EMAIL, data})
+        navigate("/hokieforu/login");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const createNewPassword = (request, navigate) => async (dispatch)=> {
+    try {
+        const {data} = await api.createNewPassword(request);
+        dispatch({type: PASSWORD, data})
+        navigate("/hokieforu/login");
+    } catch (error) {
+        console.log(error);
     }
 }

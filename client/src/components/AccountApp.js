@@ -1,15 +1,12 @@
-import React, {useState} from "react";
-import { Link,useNavigate } from "react-router-dom";
+import React from "react";
+import AuthGuard from "./AuthGuard";
 
 const AccountApp = () => {
-
-    
   return (
     <div className='app-account'>
-            You have successfully logged in!
-
+      You have successfully logged in!
     </div>
   )
 }
 
-export default AccountApp
+export default AuthGuard(AccountApp);
