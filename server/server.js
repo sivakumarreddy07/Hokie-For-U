@@ -71,7 +71,7 @@ app.post('/reset-password/:id/:token', (req, res) => {
 app.use("/users", userRoutes)
 
 const PORT = process.env.PORT || 8000;
-const MONGOOSE_URL = "mongodb+srv://hokieforu:admin@hokieforu.fm22xss.mongodb.net/hokieforu"
+const MONGOOSE_URL = "Enter your MongoDB connection string"
 
 
 mongoose.connect(MONGOOSE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
