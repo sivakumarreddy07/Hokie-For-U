@@ -116,10 +116,10 @@ const signupController = async(req, res) => {
 
     } else {
         // normal form signup
-        const {email, password, confirmPassword, firstName, lastName} = req.body;
+        const {email, password, phoneNumber, confirmPassword, firstName, lastName} = req.body;
 
         try {
-            if (email === "" || password === "" || firstName === "" || lastName === "" && password === confirmPassword && password.length >= 4) 
+            if (email === "" || password === "" || phoneNumber==="" || phoneNumber.length!==10 || firstName === "" || lastName === "" && password === confirmPassword && password.length >= 4) 
                 return res.status(400).json({message: "Invalid field!"})
 
             const existingUser = await User.findOne({email})
@@ -129,7 +129,7 @@ const signupController = async(req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 12)
 
-            const result = await User.create({email, password: hashedPassword, firstName, lastName})
+            const result = await User.create({email, password: hashedPassword, firstName, lastName, phoneNumber})
 
             const token = jwt.sign({
                 email: result.email,
@@ -147,6 +147,9 @@ const signupController = async(req, res) => {
 
     }
 }
+
+
+
 
 module.exports = {
     signinController,

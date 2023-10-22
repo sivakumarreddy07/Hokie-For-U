@@ -1,9 +1,9 @@
 import axios from "axios"
 
-const API = axios.create({baseURL:"http://localhost:8000"})
+const API = axios.create({ baseURL: "http://localhost:8000" })
 
-API.interceptors.request.use((req)=>{
-    if(localStorage.getItem("user_info")){
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem("user_info")) {
         req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("user_info")).token}`
     }
 
@@ -19,3 +19,6 @@ export const signUp = (data) => API.post("/users/signup", data)
 export const signUpGoogle = (accessToken) => API.post("/users/signup", {
     googleAccessToken: accessToken
 })
+
+export const sendEmail = (data) => API.post("/forgot-password",data)
+export const createNewPassword = (data) => API.post(`/reset-password/${data.id}/${data.token}`,data)

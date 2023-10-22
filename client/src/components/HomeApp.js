@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+import AuthGuard from './AuthGuard';
+import AuthGuard1 from './AuthGuard1';
 // ..
 AOS.init();
 
@@ -105,4 +107,4 @@ const HomeApp = () => {
   )
 }
 
-export default HomeApp
+export default AuthGuard1(HomeApp);
