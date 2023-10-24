@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../css/Register.css';
+import '../css/RegisterApp.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
@@ -18,7 +18,7 @@ const InitState = {
 }
 
 
-const Register = () => {
+const RegisterApp = () => {
     const nagivate = useNavigate();
     const dispatch = useDispatch();
     const [sForm,
@@ -98,4 +98,4 @@ const Register = () => {
     )
 }
 
-export default AuthGuard1(Register);
+export default AuthGuard1(RegisterApp);

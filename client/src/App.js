@@ -5,12 +5,13 @@ import { LOGOUT } from "../src/redux/const/actionTypes";
 import './css/App.css';
 import HomeApp from './components/HomeApp';
 import HeaderApp from './components/HeaderApp'
-import Login from "./components/Login";
+import LoginApp from "./components/LoginApp";
 import NotFoundPage from "./components/NotFoundPage";
-import Register from "./components/Register";
+import RegisterApp from "./components/RegisterApp";
 import AccountApp from "./components/AccountApp"
-import ForgotPassword from "./components/ForgotPassword";
-import ResetPassword from "./components/ResetPassword";
+import ForgotPasswordApp from "./components/ForgotPasswordApp";
+import ResetPasswordApp from "./components/ResetPasswordApp";
+import PostJobApp from "./components/PostJobApp";
 
 
 
@@ -38,11 +39,12 @@ function App() {
       <Routes>
       <Route path="/hokieforu" Component={HomeApp} />
          <Route path="/" element={<Navigate to="/hokieforu" replace />} /> 
-        <Route path='/hokieforu/login' Component={Login} />
+        <Route path='/hokieforu/login' Component={LoginApp} />
         <Route path='/hokieforu/account/home' Component={AccountApp} />
-        <Route path="/hokieforu/register" Component={Register} />
-        <Route path="/hokieforu/forgot-password" Component={ForgotPassword}></Route>
-        <Route path="/hokieforu/reset-password/:id/:token" Component={ResetPassword}></Route>
+        <Route path="/hokieforu/register" Component={RegisterApp} />
+        <Route path="/hokieforu/forgot-password" Component={ForgotPasswordApp}></Route>
+        <Route path="/hokieforu/reset-password/:id/:token" Component={ResetPasswordApp}></Route>
+        <Route path="/hokieforu/account/post-a-job" Component={PostJobApp}/>
         <Route path="*" Component={NotFoundPage} />
 
       </Routes>

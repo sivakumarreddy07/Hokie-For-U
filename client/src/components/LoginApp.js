@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import '../css/Login.css'
+import '../css/LoginApp.css'
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux';
 import { signinGoogle, signin } from "../redux/actions/auth";
 import AuthGuard1 from "./AuthGuard1";
 
-const Login = () => {
+const LoginApp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -61,4 +61,4 @@ const Login = () => {
   )
 }
 
-export default AuthGuard1(Login);
+export default AuthGuard1(LoginApp);
