@@ -46,7 +46,7 @@ export default class PostJobApp extends Component {
           </div>
           <div className="input-job">
             <span className="details">Contact Details</span>
-           <input type="tel" name="cd-phoneNumber" placeholder="Enter Phone Number" />
+            <input type="tel" name="cd-phoneNumber" placeholder="Enter Phone Number" />
           </div>
           <div className="input-job">
             <span className="details">Job Location</span>

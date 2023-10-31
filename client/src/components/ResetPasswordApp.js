@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios'
 import '../css/ResetPasswordApp.css'
 import { createNewPassword } from '../redux/actions/auth';
 import { useDispatch } from 'react-redux';
@@ -12,18 +11,6 @@ function ResetPasswordApp() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id, token } = useParams()
-
-  //axios.defaults.withCredentials = true;
-  // const handleSubmit = (e) => {
-  //     e.preventDefault()
-  //     axios.post(`http://localhost:3000/reset-password/${id}/${token}`, {password})
-  //     .then(res => {
-  //         if(res.data.Status === "Success") {
-  //             navigate('/hokieforu/login')
-
-  //         }
-  //     }).catch(err => console.log(err))
-  // }
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -37,7 +24,7 @@ function ResetPasswordApp() {
         <form onSubmit={handleSubmit} className='reset-form'>
           <h1>Password Reset</h1>
           <div className='enter-password'>
-              <p>Welcome! Please enter your new password.</p>
+            <p>Welcome! Please enter your new password.</p>
             <input
               type="password"
               placeholder="Enter Password"

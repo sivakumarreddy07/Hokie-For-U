@@ -32,8 +32,6 @@ const HeaderApp = ({ authenticated, handleLogOut }) => {
     };
   }, []); // Empty dependency array ensures that this effect runs only once
 
-
-
   return (
     <div className='app-header' style={isHomePage ? { backgroundColor: `${color}` } : { backgroundColor: '#861f41' }}>
       <Link className='logo-and-title' to="/hokieforu">
@@ -42,9 +40,9 @@ const HeaderApp = ({ authenticated, handleLogOut }) => {
       </Link>
       {authenticated ?
         <div className='features-link'>
-          <p><i className='fa fa-bell'/>&nbsp;<Link>Notifications</Link></p>
-          <p><i className='fa fa-suitcase'/>&nbsp;<Link to="/hokieforu/myjobs">My Jobs</Link></p>
-          <p><i className='fa fa-user'/>&nbsp;<Link to="/hokieforu/myprofile" className='profile-button'>My Profile</Link></p>
+          <p><i className='fa fa-bell' />&nbsp;<Link>Notifications</Link></p>
+          <p><i className='fa fa-suitcase' />&nbsp;<Link to="/hokieforu/myjobs">My Jobs</Link></p>
+          <p><i className='fa fa-user' />&nbsp;<Link to="/hokieforu/myprofile" className='profile-button'>My Profile</Link></p>
           <Link onClick={handleLogOut} className='login-button' to="/hokieforu">Logout</Link>
         </div>
         :

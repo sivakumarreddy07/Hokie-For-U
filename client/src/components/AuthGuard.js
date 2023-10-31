@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function AuthGuard(Component) {
   return function WrappedComponent(props) {
-    const isAuthenticated = localStorage.getItem('user_info')!==null; // Adjust this based on your Redux state
+    const isAuthenticated = localStorage.getItem('user_info') !== null; // Adjust this based on your Redux state
     const navigate = useNavigate();
 
     if (!isAuthenticated) {

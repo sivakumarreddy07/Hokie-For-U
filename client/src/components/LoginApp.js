@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import '../css/LoginApp.css'
 import { useGoogleLogin } from '@react-oauth/google';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { signinGoogle, signin } from "../redux/actions/auth";
 import AuthGuard1 from "./AuthGuard1";
 
-const LoginApp = () => {
+const LoginApp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -27,24 +26,23 @@ const LoginApp = () => {
     if (email !== "" && password !== "") {
       dispatch(signin({ email, password }, navigate))
     }
-
   }
   return (
     <div className='app-login'>
-
       <div className="login-container">
         <form action="#" className='login-form'>
           <h1>Welcome back</h1>
           <input type="email" onChange={e => setEmail(e.target.value)} placeholder="Email" />
           <input type="password" onChange={e => setPassword(e.target.value)} placeholder="Password" />
           <div className='forgotContainer'>
-            
             <div>
-            <Link to="/hokieforu/forgot-password">Forgot Password</Link>
+              <Link to="/hokieforu/forgot-password">Forgot Password</Link>
             </div>
           </div>
           <div className='sigin'>
-            <button onClick={handleSubmit} className='signin-button'>Sign In</button></div>
+            <button onClick={handleSubmit} className='signin-button'>Sign In</button>
+          </div>
+          {props.errorMessage && <div className="error-message">{props.errorMessage}</div>}
           <span>or</span>
           <div className="social-container">
             <button type="button" class="login-with-google-btn" onClick={() => login()} >
@@ -61,4 +59,11 @@ const LoginApp = () => {
   )
 }
 
-export default AuthGuard1(LoginApp);
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    errorMessage: state.auth.errorMessage,
+  };
+};
+
+export default connect(mapStateToProps)(AuthGuard1(LoginApp));
