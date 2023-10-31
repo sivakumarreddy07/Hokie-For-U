@@ -1,11 +1,10 @@
 import React from 'react'
 import '../css/NotFoundPage.css'
 
-const NotFoundPage=() => {
+const NotFoundPage = () => {
   return (
     <div className='page-not-found'>
-        Page not found
-      
+      Page not found
     </div>
   )
 }

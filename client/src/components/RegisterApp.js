@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import '../css/Register.css';
+import '../css/RegisterApp.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import { signup, signupGoogle } from "../redux/actions/auth";
 import AuthGuard1 from "./AuthGuard1";
 
@@ -18,7 +18,7 @@ const InitState = {
 }
 
 
-const Register = () => {
+const RegisterApp = (props) => {
     const nagivate = useNavigate();
     const dispatch = useDispatch();
     const [sForm,
@@ -67,7 +67,7 @@ const Register = () => {
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Phone Number</span>
-                                    <input type='tel' name='phoneNumber'  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={handleChange} placeholder="Enter your number" required />
+                                    <input type='tel' name='phoneNumber' pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={handleChange} placeholder="Enter your number" required />
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Password</span>
@@ -84,6 +84,7 @@ const Register = () => {
                             <div class="button">
                                 <input type="submit" onClick={handleOnSubmit} value="Register" />
                             </div>
+                            {props.errorMessage && <div className="error-message">{props.errorMessage}</div>}
                             <span>or</span>
                             <div className="social-container-register">
                                 <button type="button" class="register-with-google-btn" onClick={() => login()} >
@@ -98,4 +99,11 @@ const Register = () => {
     )
 }
 
-export default AuthGuard1(Register);
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        errorMessage: state.auth.errorMessage,
+    };
+};
+
+export default connect(mapStateToProps)(AuthGuard1(RegisterApp));

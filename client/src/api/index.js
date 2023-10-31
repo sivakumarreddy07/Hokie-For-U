@@ -20,5 +20,5 @@ export const signUpGoogle = (accessToken) => API.post("/users/signup", {
     googleAccessToken: accessToken
 })
 
-export const sendEmail = (data) => API.post("/forgot-password",data)
-export const createNewPassword = (data) => API.post(`/reset-password/${data.id}/${data.token}`,data)
+export const sendEmail = (data) => API.post("/users/forgot-password", data)
+export const createNewPassword = (data) => API.post(`/users/reset-password/${data.id}/${data.token}`, data)
