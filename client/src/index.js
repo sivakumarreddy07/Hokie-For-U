@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
+import { CLIENT_ID } from './config';
 import { Provider } from 'react-redux';
 import { reducers } from "./redux/reducers"
 import thunk from "redux-thunk"
@@ -21,7 +21,7 @@ root.render(
   <Provider store={store}>
       <BrowserRouter>
       <GoogleOAuthProvider
-                clientId={`Enter your client id`}>
+                clientId= {CLIENT_ID}>
        <App />
        </GoogleOAuthProvider>
       </BrowserRouter>

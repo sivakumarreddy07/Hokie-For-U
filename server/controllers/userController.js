@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken")
 const axios = require("axios")
 const config = require("config")
 var nodemailer = require("nodemailer")
+const {v4 : uuidv4} = require('uuid')
 const User = require("../models/user")
 
 
@@ -91,13 +92,14 @@ const signupController = async (req, res) => {
                 const lastName = response.data.family_name;
                 const email = response.data.email;
                 const picture = response.data.picture;
+                const userId = uuidv4();
 
                 const existingUser = await User.findOne({ email })
 
                 if (existingUser)
                     return res.status(400).json({ message: "Email already exists!" })
 
-                const result = await User.create({ verified: "true", email, firstName, lastName, profilePicture: picture })
+                const result = await User.create({ verified: "true", email, firstName, lastName, profilePicture: picture, userId})
 
                 const token = jwt.sign({
                     email: result.email,
@@ -117,6 +119,7 @@ const signupController = async (req, res) => {
     } else {
         // normal form signup
         const { email, password, phoneNumber, confirmPassword, firstName, lastName } = req.body;
+        const userId = uuidv4();
 
         try {
             if (email === "" || password === "" || phoneNumber === "" || phoneNumber.length !== 10 || firstName === "" || lastName === "" && password === confirmPassword && password.length >= 4)
@@ -129,7 +132,7 @@ const signupController = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 12)
 
-            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber })
+            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber, userId})
 
             const token = jwt.sign({
                 email: result.email,
