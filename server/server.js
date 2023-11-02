@@ -12,7 +12,7 @@ app.use("/users", userRoutes)
 app.use("/jobs", jobRoutes)
 
 const PORT = process.env.PORT || 8000;
-const MONGOOSE_URL = config.get("connectionString")
+const MONGOOSE_URL = config.get("CONNECTION_STRING")
 
 mongoose.connect(MONGOOSE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => {
