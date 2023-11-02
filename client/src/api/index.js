@@ -22,3 +22,4 @@ export const signUpGoogle = (accessToken) => API.post("/users/signup", {
 
 export const sendEmail = (data) => API.post("/users/forgot-password", data)
 export const createNewPassword = (data) => API.post(`/users/reset-password/${data.id}/${data.token}`, data)
+export const postJob = (data) => API.post(`/jobs/post-job`,data)

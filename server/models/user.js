@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   phoneNumber: { type: String, required: false },
   password: { type: String, required: false },
   profilePicture: { type: String, required: false },
-  id: { type: String }
+  userId: { type: String, unique: true, required: true }
 }, {
   timestamps: true,
 })

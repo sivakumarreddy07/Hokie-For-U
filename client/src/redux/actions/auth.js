@@ -81,3 +81,14 @@ export const createNewPassword = (request, navigate) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const postJob = (request, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.postJob(request);
+        dispatch({ type: 'REGISTER', data })
+        alert('Job Posted Successfully');
+        navigate("/hokieforu/account/home");
+    } catch (error) {
+        console.log(error);
+    }
+}
