@@ -13,4 +13,24 @@ const jobSchema = mongoose.Schema({
   timestamps: true,
 })
 
-module.exports = mongoose.model("Job", jobSchema)
+const Job = mongoose.model("Job", jobSchema)
+
+Job.addUserToJob = async (userEmail, jobId, isPostedJob) => {
+  try {
+    const job = await Job.findOne({ jobId });
+
+    if (!job) {
+      throw new Error('Job not found');
+    }
+
+      job.pickedUsers.push(userEmail);
+
+    await job.save();
+    return job;
+
+  } catch (error) {
+    throw new Error('Error adding user to job');
+  }
+};
+
+module.exports = Job;
