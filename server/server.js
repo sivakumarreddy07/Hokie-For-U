@@ -11,6 +11,8 @@ app.use(express.json())
 app.use("/users", userRoutes)
 app.use("/jobs", jobRoutes)
 
+app.use(express.static('public'))
+
 const PORT = process.env.PORT || 8000;
 const MONGOOSE_URL = config.get("CONNECTION_STRING")
 

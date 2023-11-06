@@ -12,6 +12,7 @@ import AccountApp from "./components/AccountApp"
 import ForgotPasswordApp from "./components/ForgotPasswordApp";
 import ResetPasswordApp from "./components/ResetPasswordApp";
 import PostJobApp from "./components/PostJobApp";
+import ProfileApp from "./components/ProfileApp";
 
 
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/hokieforu/forgot-password" Component={ForgotPasswordApp}></Route>
         <Route path="/hokieforu/reset-password/:id/:token" Component={ResetPasswordApp}></Route>
         <Route path="/hokieforu/account/post-a-job" Component={PostJobApp} />
+        <Route path="/hokieforu/account/myprofile" Component={ProfileApp} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
     </div>

@@ -2,10 +2,26 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const axios = require("axios")
 const config = require("config")
+const multer = require("multer")
 var nodemailer = require("nodemailer")
-const {v4 : uuidv4} = require('uuid')
+const path = require("path")
+const { v4: uuidv4 } = require('uuid')
 const User = require("../models/user")
 
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/images")
+    },
+    filename: (req, file, cb) => {
+        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({
+    storage: storage
+})
 
 const signinController = async (req, res) => {
     if (req.body.googleAccessToken) {
@@ -99,7 +115,7 @@ const signupController = async (req, res) => {
                 if (existingUser)
                     return res.status(400).json({ message: "Email already exists!" })
 
-                const result = await User.create({ verified: "true", email, firstName, lastName, profilePicture: picture, userId})
+                const result = await User.create({ verified: "true", email, firstName, lastName, profilePicture: picture, userId })
 
                 const token = jwt.sign({
                     email: result.email,
@@ -132,7 +148,7 @@ const signupController = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 12)
 
-            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber, userId})
+            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber, userId })
 
             const token = jwt.sign({
                 email: result.email,
@@ -207,9 +223,47 @@ const resetPasswordController = async (req, res) => {
     })
 }
 
+const getUserDetailsController = async (req, res) => {
+    const { userEmail } = req.body;
+    try {
+        const userDetails = await User.findOne({ email: userEmail });
+        res.status(200).json(userDetails)
+
+    } catch (error) {
+        res.status(400).send("Error fetching User Details");
+    }
+
+}
+
+const updateUserDetailsController = async (req, res) => {
+    const { phoneNumber, firstName, lastName, email } = req.body;
+    const profilePicture = req.file.filename;
+    try {
+        const user = await User.findOne({ email });
+        
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+       user.phoneNumber = phoneNumber;
+        user.lastName = lastName;
+        user.firstName = firstName;
+        user.profilePicture = profilePicture;
+        const updatedUser = await user.save();
+        res.status(200).json(updatedUser)
+
+    } catch (error) {
+        res.status(400).send("Error fetching User Details");
+    }
+
+}
+
 module.exports = {
     signinController,
     signupController,
     forgotPasswordController,
-    resetPasswordController
+    resetPasswordController,
+    getUserDetailsController,
+    updateUserDetailsController,
+    upload
 }
