@@ -8,3 +8,8 @@ When user is registering, password is getting stored directly in the DB without 
 
 ## Existing user - Register
 Already existing user with same email id is able to register into the application
+
+# Hokie-For-U : Sprint-2 issues
+
+## Schema - Missing jobDate
+jobDate needs to be added to the schema
