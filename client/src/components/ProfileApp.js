@@ -80,7 +80,7 @@ const ProfileApp = () => {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
 
-    function handleSubmit(e) {
+    const handleSubmit=async(e) =>{
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.email !== "") {
             const formData = new FormData();
@@ -89,13 +89,14 @@ const ProfileApp = () => {
             formData.append('profilePicture', sForm.profilePicture);
             formData.append('email',sForm.email);
             formData.append('firstName',sForm.firstName);
-            console.log(typeof(sForm.profilePicture))
-            console.log(Object.fromEntries(formData))
-            console.log(sForm)
-            dispatch(updateUserDetails(formData, nagivate));
-            delay(1000);
-            const photoURL = "http://localhost:8000/images/"+sForm.profilePicture.name;
-            setPhoto(photoURL);
+            try {
+                const response = await dispatch(updateUserDetails(formData, nagivate));
+                if (response && response.profilePicture) {
+                    setPhoto("http://localhost:8000/images/"+response.profilePicture);
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     return (
