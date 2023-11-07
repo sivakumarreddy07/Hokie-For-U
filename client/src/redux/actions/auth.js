@@ -85,9 +85,32 @@ export const createNewPassword = (request, navigate) => async (dispatch) => {
 export const postJob = (request, navigate) => async (dispatch) => {
     try {
         const { data } = await api.postJob(request);
+        console.log(request)
         dispatch({ type: 'REGISTER', data })
         alert('Job Posted Successfully');
         navigate("/hokieforu/account/home");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getUserDetails = (request, navigate) => async (dispatch) => {
+    try {
+        console.log(request);
+        const { data } = await api.userDetails(request);
+        console.log(data)
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateUserDetails = (request, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.updateUserDetails(request);
+        dispatch({ type: 'REGISTER', data })
+        alert("Profile Details updated successfully!")
+        navigate("/hokieforu/account/myprofile");
     } catch (error) {
         console.log(error);
     }

@@ -20,6 +20,17 @@
     text-decoration: none;
 }
 
+.logo-and-title-disabled{
+    cursor: not-allowed;
+    font-family: "Luckiest Guy";
+    color: azure;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: x-large;
+    text-decoration: none;
+}
+
 .app-header img {
     border-radius: 50%;
     height: 50px;
