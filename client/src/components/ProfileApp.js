@@ -28,6 +28,9 @@ const ProfileApp = () => {
         if(response.profilePicture.includes("http")){
             setPhoto(response.profilePicture);
         }
+        else if(response.profilePicture.length===0){
+            setPhoto("/images/avatar.png");
+        }
         else{
             setPhoto("http://localhost:8000/images/"+response.profilePicture);
         }
@@ -73,7 +76,11 @@ const ProfileApp = () => {
         }
     };
 
-    function handleSubmit(e) {
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+    const handleSubmit=async(e) =>{
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.email !== "") {
             const formData = new FormData();
@@ -82,9 +89,14 @@ const ProfileApp = () => {
             formData.append('profilePicture', sForm.profilePicture);
             formData.append('email',sForm.email);
             formData.append('firstName',sForm.firstName);
-            dispatch(updateUserDetails(formData, nagivate));
-            const photoURL = "http://localhost:8000/images/"+sForm.profilePicture.name;
-            setPhoto(photoURL);
+            try {
+                const response = await dispatch(updateUserDetails(formData, nagivate));
+                if (response && response.profilePicture) {
+                    setPhoto("http://localhost:8000/images/"+response.profilePicture);
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     return (
