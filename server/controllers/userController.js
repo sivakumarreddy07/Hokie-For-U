@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const axios = require("axios")
 const config = require("config")
 const multer = require("multer")
-var nodemailer = require("nodemailer")
+const emailController = require("../controllers/emailController")
 const path = require("path")
 const { v4: uuidv4 } = require('uuid')
 const User = require("../models/user")
@@ -136,7 +136,7 @@ const signupController = async (req, res) => {
         // normal form signup
         const { email, password, phoneNumber, confirmPassword, firstName, lastName } = req.body;
         const userId = uuidv4();
-
+        const profilePicture ='';
         try {
             if (email === "" || password === "" || phoneNumber === "" || phoneNumber.length !== 10 || firstName === "" || lastName === "" && password === confirmPassword && password.length >= 4)
                 return res.status(400).json({ message: "Invalid field!" })
@@ -148,7 +148,7 @@ const signupController = async (req, res) => {
 
             const hashedPassword = await bcrypt.hash(password, 12)
 
-            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber, userId })
+            const result = await User.create({ email, password: hashedPassword, firstName, lastName, phoneNumber, userId, profilePicture })
 
             const token = jwt.sign({
                 email: result.email,
@@ -169,37 +169,25 @@ const signupController = async (req, res) => {
 
 const forgotPasswordController = async (req, res) => {
     const { email } = req.body;
-    console.log(req.body)
-    User.findOne({ email: email })
-        .then(user => {
-            console.log(user)
-            if (!user) {
-                return res.send({ Status: "Entered email doesn't exist" })
-            }
-            const token = jwt.sign({ email: user.email, id: user._id }, config.get("JWT_SECRET"), { expiresIn: "1h" })
-            var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'hokieforu@gmail.com',
-                    pass: 'xvzfoiujoxbfikpw'
-                }
-            });
 
-            var mailOptions = {
-                from: 'hokieforu@gmail.com',
-                to: user.email,
-                subject: 'HokieForU: Reset Password Link',
-                html: `http://localhost:3000/hokieforu/reset-password/${user._id}/${token}`
-            };
+    try {
+        const user = await User.findOne({ email: email });
+        console.log(user);
+        if (!user) {
+            return res.send({ Status: "Entered email doesn't exist" });
+        }
+        const token = jwt.sign({ email: user.email, id: user._id }, config.get("JWT_SECRET"), { expiresIn: "1h" })
 
-            transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    return res.send({ Status: "Success" })
-                }
-            });
-        })
+        const resetLink = `http://localhost:3000/hokieforu/reset-password/${user._id}/${token}`;
+        const subject = 'HokieForU: Reset Password Link';
+
+        await emailController.sendNotificationMail(user.email, subject, resetLink);
+        return res.send({ Status: "Success" });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ Status: "Error" });
+    }
 }
 
 const resetPasswordController = async (req, res) => {
@@ -237,18 +225,24 @@ const getUserDetailsController = async (req, res) => {
 
 const updateUserDetailsController = async (req, res) => {
     const { phoneNumber, firstName, lastName, email } = req.body;
-    const profilePicture = req.file.filename;
+    let profilePicture = '';
+    if(req.file){
+        profilePicture = req.file.filename;
+    }
+   
     try {
         const user = await User.findOne({ email });
-        
+
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-       user.phoneNumber = phoneNumber;
+        user.phoneNumber = phoneNumber;
         user.lastName = lastName;
         user.firstName = firstName;
-        user.profilePicture = profilePicture;
+        if(req.file){
+            user.profilePicture = profilePicture;
+        }
         const updatedUser = await user.save();
         res.status(200).json(updatedUser)
 
