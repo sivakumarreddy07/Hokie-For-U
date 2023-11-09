@@ -49,7 +49,7 @@ function App() {
         <Route path="/hokieforu/reset-password/:id/:token" Component={ResetPasswordApp}></Route>
         <Route path="/hokieforu/account/post-a-job" Component={PostJobApp} />
         <Route path="/hokieforu/account/myprofile" Component={ProfileApp} />
-        <Route path="/hokieforu/account/fetch-a-job" Component={FetchJobApp} /> 
+        <Route path="/hokieforu/account/myjobs" Component={FetchJobApp} /> 
         <Route path="*" Component={NotFoundPage} />
       </Routes>
     </div>

@@ -115,3 +115,13 @@ export const updateUserDetails = (request, navigate) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const getJobDetails = (request, navigate) => async (dispatch) => {
+    try {
+        console.log(request);
+        const {data} = await api.getJob(request);
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}

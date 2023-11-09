@@ -94,10 +94,10 @@ const fetchUserPickedJobsController = async (req, res) => {
 const fetchUserPostedJobsController = async (req, res) => {
     const { userEmail } = req.body;
     const isPostedJob = true
+    console.log(req.body)
     try {
 
         const postedJobs = await User.getUserJobs(userEmail, isPostedJob);
-
         const result = await Job.find({ jobId: { $in: postedJobs } }).exec();
         res
             .status(200)

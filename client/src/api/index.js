@@ -26,4 +26,4 @@ export const userDetails = (data) => API.post('/users/details',data)
 export const updateUserDetails = (data) => API.post('/users/update',data)
 
 export const postJob = (data) => API.post(`/jobs/post-job`,data)
-
+export const getJob = (data) => API.post(`/jobs/user-posted-jobs`,data)

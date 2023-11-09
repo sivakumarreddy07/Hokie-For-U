@@ -1,22 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 //import AuthGuard from "./AuthGuard";
+import { useNavigate } from "react-router-dom";
+import { getJobDetails } from "../redux/actions/auth";
 import '../css/FetchJobApp.css'
 
 const FetchJobApp = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [jobs, setJobs] = useState([]);
+  useEffect(() => {
+    fetchJobData();
+  }, []);
+  async function fetchJobData()
+  {
+    const userDetails = JSON.parse(localStorage.getItem('user_info'));
+    const response = await dispatch(getJobDetails({ userEmail: userDetails.result.email }, navigate));
+    console.log(response);
+    setJobs(response)
+  }
   return (
     <div className='fetch-jobs'>
       <div className="search-jobs">
-        <h1>Open Jobs, People need help from you</h1>
-        <i className="fa fa-search"></i>
-        <input type="text" name="search jobs" placeholder="Search Jobs or communities" />
-        <div className="buttons">
-          <button type="submit">Search Jobs</button>
-          <Link to="/hokieforu/account/post-a-job">Post a job</Link>
-        </div>
-      </div>
-      <div className="search-job-img">
-        <img src="/images/searchJobs.jpg" alt="" />
+      {jobs.map((job) => (
+          <div key={job._id} className="job-card">
+            <h3>{job.jobTitle}</h3>
+            {/* <p>{job.jobDescription}</p> */}
+            {/* <p>Contact: {job.contactNumber}</p>
+            <p>Location: {job.jobLocation}</p> */}
+            <p>Location: {job.jobLocation} Pay: ${job.jobPay}</p>
+            <p>Posted by: {job.postedUser[0]}</p>
+            {/* Add more details as needed */}
+          </div>
+        ))}
       </div>
     </div>
   )
