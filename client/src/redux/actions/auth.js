@@ -115,3 +115,24 @@ export const updateUserDetails = (request, navigate) => async (dispatch) => {
         console.log(error);
     }
 }
+
+export const getAllJobDetails = () => async (dispatch) => {
+    try {
+        const { data } = await api.getAllJobs();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const pickJob = (request, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.pickJob(request);
+        console.log(request)
+        dispatch({ type: '', data })
+        alert('Job Picked Successfully');
+        navigate("/hokieforu/account/jobs");
+    } catch (error) {
+        console.log(error);
+    }
+}

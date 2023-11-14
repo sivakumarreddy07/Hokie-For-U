@@ -51,7 +51,7 @@ const RegisterApp = (props) => {
                 <div className='registerForm'>
                     <div className="title">Registration</div>
                     <div className="content">
-                        <form action="#">
+                        <form action="#" className="register-form" onSubmit={handleOnSubmit}>
                             <div className="user-details">
                                 <div className="input-box">
                                     <span className="details">First Name</span>
@@ -82,13 +82,13 @@ const RegisterApp = (props) => {
                                 Already a user?&nbsp;<Link to="/hokieforu/login">Login here</Link>
                             </div>
                             <div class="button">
-                                <input type="submit" onClick={handleOnSubmit} value="Register" />
+                                <input type="submit" value="Register" />
                             </div>
                             {props.errorMessage && <div className="error-message">{props.errorMessage}</div>}
                             <span>or</span>
                             <div className="social-container-register">
                                 <button type="button" class="register-with-google-btn" onClick={() => login()} >
-                                    Sign in with Google
+                                    Sign up with Google
                                 </button>
                             </div>
                         </form>

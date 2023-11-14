@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUserDetails } from '../redux/actions/auth';
 import { updateUserDetails } from '../redux/actions/auth';
+import AuthGuard from "./AuthGuard";
 import '../css/ProfileApp.css';
 
 const InitState = {
@@ -102,7 +103,7 @@ const ProfileApp = () => {
     return (
         <div className="app-profile">
             <h1>My Profile</h1>
-            <form>
+            <form className='profile-form'>
                 <div className='details-user'>
                     <div className='box-input'>
                         <span>First Name:</span>
@@ -163,4 +164,4 @@ const ProfileApp = () => {
     );
 };
 
-export default ProfileApp;
+export default AuthGuard(ProfileApp);

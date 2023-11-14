@@ -45,19 +45,19 @@
   background: linear-gradient(135deg, #861f41, #ca4f00);
 }
 
-.content form .user-details {
+.content .register-form .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
 
-form .user-details .input-box {
+.register-form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
 
-form .input-box span.details {
+.register-form .input-box span.details {
   display: block;
   font-weight: 500;
   text-align: left;
@@ -80,7 +80,7 @@ form .input-box span.details {
   border-color: #861f41;
 }
 
-form .category {
+.register-form .category {
   display: flex;
   width: 80%;
   margin: 14px 0;
@@ -105,12 +105,12 @@ form .category {
   font-weight: bold;
 }
 
-form .button {
+.register-form .button {
   height: 45px;
   margin: 20px 0px 5px 0px;
 }
 
-form .button input {
+.register-form .button input {
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -124,7 +124,7 @@ form .button input {
   text-transform: uppercase;
 }
 
-form .button input:hover {
+.register-form .button input:hover {
   /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #861f41, #ca4f00);
 }
@@ -210,16 +210,16 @@ form .button input:hover {
     margin-top: 400px;
   }
 
-  form .user-details .input-box {
+  .register-form .user-details .input-box {
     margin-bottom: 15px;
     width: 100%;
   }
 
-  form .category {
+  .register-form .category {
     width: 100%;
   }
 
-  .content form .user-details {
+  .content .register-form .user-details {
     max-height: 300px;
     overflow-y: scroll;
   }

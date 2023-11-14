@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postJob } from "../redux/actions/auth";
+import AuthGuard from "./AuthGuard";
 import "../css/PostJobApp.css"
 
 const InitState = {
@@ -76,4 +77,4 @@ const PostJobApp = (props) => {
   }
 
 
-export default PostJobApp;
+export default AuthGuard(PostJobApp);
