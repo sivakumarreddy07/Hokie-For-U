@@ -16,20 +16,23 @@ const FetchJobApp = () => {
   {
     const userDetails = JSON.parse(localStorage.getItem('user_info'));
     const response = await dispatch(getJobDetails({ userEmail: userDetails.result.email }, navigate));
-    console.log(response);
     setJobs(response)
   }
   return (
-    <div className='fetch-jobs'>
+    <div className='fetch-jobs-container'>
       <div className="search-jobs">
       {jobs.map((job) => (
           <div key={job._id} className="job-card">
             <h3>{job.jobTitle}</h3>
-            {/* <p>{job.jobDescription}</p> */}
+            <p>{job.jobLocation}</p>
+            <div class = "details">
+              {job.jobDescription}
+            </div>
+            <div class = "job-pay">Pay: ${job.jobPay} </div>
             {/* <p>Contact: {job.contactNumber}</p>
             <p>Location: {job.jobLocation}</p> */}
-            <p>Location: {job.jobLocation} Pay: ${job.jobPay}</p>
-            <p>Posted by: {job.postedUser[0]}</p>
+            {/* <p>Location: {job.jobLocation} Pay: ${job.jobPay}</p>
+            <p>Posted by: {job.postedUser[0]}</p> */}
             {/* Add more details as needed */}
           </div>
         ))}

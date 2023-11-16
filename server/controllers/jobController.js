@@ -94,7 +94,6 @@ const fetchUserPickedJobsController = async (req, res) => {
 const fetchUserPostedJobsController = async (req, res) => {
     const { userEmail } = req.body;
     const isPostedJob = true
-    console.log(req.body)
     try {
 
         const postedJobs = await User.getUserJobs(userEmail, isPostedJob);
