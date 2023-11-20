@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AuthGuard from "./AuthGuard";
+import Notification from './Notification';
 import '../css/AccountApp.css';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,7 @@ const AccountApp = () => {
   const [jobDescriptionSearchQuery, setJobDescriptionSearchQuery] = useState('');
   const [jobLocationSearchQuery, setJobLocationSearchQuery] = useState('');
   const userEmail = JSON.parse(localStorage.getItem("user_info")).result.email;
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     fetchJobData();
@@ -50,6 +52,10 @@ const AccountApp = () => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to proceed?")) {
       dispatch(pickJob({ jobId, userEmail }, nagivate));
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000);
     }
   }
   return (
@@ -76,14 +82,20 @@ const AccountApp = () => {
             onChange={(e) => setJobLocationSearchQuery(e.target.value)}
           />
         </div>
-        <div className="buttons">
-          <Link to="/hokieforu/account/post-a-job">Post a job</Link>
-        </div>
+
       </div>
 
       <div className="jobs-container">
-        <h1>Available Jobs</h1>
-
+        {showNotification && (
+          <Notification
+            message="Job Picked Successfully!"
+            onClose={() => setShowNotification(false)}
+          />
+        )}
+        <div className="buttons">
+          <h1>Available Jobs</h1>
+          <Link to="/hokieforu/account/post-a-job">Post a job</Link>
+        </div>
         <div className="app-jobs">
           {currentPosts.map((job) => (
             <div key={job._id} className="job-grid">

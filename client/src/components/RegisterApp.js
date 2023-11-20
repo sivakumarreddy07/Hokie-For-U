@@ -5,6 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, connect } from 'react-redux';
 import { signup, signupGoogle } from "../redux/actions/auth";
 import AuthGuard1 from "./AuthGuard1";
+import Notification from "./Notification";
 
 
 
@@ -23,6 +24,7 @@ const RegisterApp = (props) => {
     const dispatch = useDispatch();
     const [sForm,
         setsForm] = useState(InitState)
+        const [showNotification, setShowNotification] = useState(false);
 
     const handleChange = (e) => setsForm({
         ...sForm,
@@ -38,12 +40,23 @@ const RegisterApp = (props) => {
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, nagivate))
+            setsForm(InitState);
+            setShowNotification(true);
+                setTimeout(() => {
+                    setShowNotification(false);
+                }, 3000);
         }
     }
 
     const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
     return (
         <div className='register'>
+            {showNotification && (
+                <Notification
+                    message="Profile Details Updated Successfully!"
+                    onClose={() => setShowNotification(false)}
+                />
+            )}
             <div className="app-register">
                 <div className='registerImage'>
                     <img src='/images/registerImage.jpeg' alt='logo' />
@@ -67,7 +80,7 @@ const RegisterApp = (props) => {
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Phone Number</span>
-                                    <input type='tel' name='phoneNumber' pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={handleChange} placeholder="Enter your number" required />
+                                    <input type='tel' name='phoneNumber' pattern="[0-9]{10}" onChange={handleChange} placeholder="Enter your number" required />
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Password</span>
