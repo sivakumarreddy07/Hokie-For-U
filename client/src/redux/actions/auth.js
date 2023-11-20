@@ -41,7 +41,7 @@ export const signup = (formData, navigate) => async (dispatch) => {
         const { data } = await api.signUp(formData)
 
         dispatch({ type: REGISTER, data })
-        navigate("/hokieforu/login")
+        navigate("/hokieforu/register")
     } catch (err) {
         console.log(err);
         dispatch({ type: AUTH_ERROR, errorMessage: err.response.data.message })
@@ -86,9 +86,8 @@ export const postJob = (request, navigate) => async (dispatch) => {
     try {
         const { data } = await api.postJob(request);
         console.log(request)
-        dispatch({ type: 'REGISTER', data })
-        alert('Job Posted Successfully');
-        navigate("/hokieforu/account/home");
+        dispatch({ type: 'REGISTER', data });
+        navigate("/hokieforu/account/post-a-job");
     } catch (error) {
         console.log(error);
     }
@@ -109,8 +108,28 @@ export const updateUserDetails = (request, navigate) => async (dispatch) => {
     try {
         const { data } = await api.updateUserDetails(request);
         dispatch({ type: 'REGISTER', data })
-        alert("Profile Details updated successfully!")
         navigate("/hokieforu/account/myprofile");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getAllJobDetails = () => async (dispatch) => {
+    try {
+        const { data } = await api.getAllJobs();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const pickJob = (request, navigate) => async (dispatch) => {
+    try {
+        const { data } = await api.pickJob(request);
+        console.log(request)
+        dispatch({ type: '', data })
+        alert('Job Picked Successfully');
+        navigate("/hokieforu/account/home");
     } catch (error) {
         console.log(error);
     }

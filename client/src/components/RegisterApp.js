@@ -5,6 +5,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch, connect } from 'react-redux';
 import { signup, signupGoogle } from "../redux/actions/auth";
 import AuthGuard1 from "./AuthGuard1";
+import Notification from "./Notification";
 
 
 
@@ -23,6 +24,7 @@ const RegisterApp = (props) => {
     const dispatch = useDispatch();
     const [sForm,
         setsForm] = useState(InitState)
+        const [showNotification, setShowNotification] = useState(false);
 
     const handleChange = (e) => setsForm({
         ...sForm,
@@ -38,12 +40,23 @@ const RegisterApp = (props) => {
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, nagivate))
+            setsForm(InitState);
+            setShowNotification(true);
+                setTimeout(() => {
+                    setShowNotification(false);
+                }, 3000);
         }
     }
 
     const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
     return (
         <div className='register'>
+            {showNotification && (
+                <Notification
+                    message="Profile Details Updated Successfully!"
+                    onClose={() => setShowNotification(false)}
+                />
+            )}
             <div className="app-register">
                 <div className='registerImage'>
                     <img src='/images/registerImage.jpeg' alt='logo' />
@@ -51,7 +64,7 @@ const RegisterApp = (props) => {
                 <div className='registerForm'>
                     <div className="title">Registration</div>
                     <div className="content">
-                        <form action="#">
+                        <form action="#" className="register-form" onSubmit={handleOnSubmit}>
                             <div className="user-details">
                                 <div className="input-box">
                                     <span className="details">First Name</span>
@@ -67,7 +80,7 @@ const RegisterApp = (props) => {
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Phone Number</span>
-                                    <input type='tel' name='phoneNumber' pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" onChange={handleChange} placeholder="Enter your number" required />
+                                    <input type='tel' name='phoneNumber' pattern="[0-9]{10}" onChange={handleChange} placeholder="Enter your number" required />
                                 </div>
                                 <div className="input-box">
                                     <span className="details">Password</span>
@@ -82,13 +95,13 @@ const RegisterApp = (props) => {
                                 Already a user?&nbsp;<Link to="/hokieforu/login">Login here</Link>
                             </div>
                             <div class="button">
-                                <input type="submit" onClick={handleOnSubmit} value="Register" />
+                                <input type="submit" value="Register" />
                             </div>
                             {props.errorMessage && <div className="error-message">{props.errorMessage}</div>}
                             <span>or</span>
                             <div className="social-container-register">
                                 <button type="button" class="register-with-google-btn" onClick={() => login()} >
-                                    Sign in with Google
+                                    Sign up with Google
                                 </button>
                             </div>
                         </form>

@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import { sendEmail } from '../redux/actions/auth';
 import '../css/ForgotPasswordApp.css'
 import AuthGuard1 from './AuthGuard1';
+import Notification from './Notification';
 
 
 function ForgotPasswordApp() {
   const [email, setEmail] = useState()
+  const [showNotification, setShowNotification] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -17,11 +19,21 @@ function ForgotPasswordApp() {
   function handleSubmit(e) {
     e.preventDefault()
     console.log(email)
-    dispatch(sendEmail({ email }, navigate))
+    dispatch(sendEmail({ email }, navigate));
+    setShowNotification(true);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
   }
 
   return (
     <div className="forgot-password">
+      {showNotification && (
+          <Notification
+            message="Email Sent Successfully!"
+            onClose={() => setShowNotification(false)}
+          />
+        )}
       <div className="password-container">
         <form onSubmit={handleSubmit} className='forgot-form'>
           <h1>Password Reset</h1>
