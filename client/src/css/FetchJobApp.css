@@ -1,0 +1,79 @@
+/*.fetch-jobs-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    /* justify-content: center; 
+    gap: 2rem;
+    padding: 0rem 5rem;
+    padding-top: 6rem;
+} */
+.fetch-jobs-container{
+  max-width: 900px;
+  margin: 20px auto;
+  font-family: sans-serif;
+  padding: 2rem 5rem;
+  padding-top: 6rem;
+}
+
+  
+.fetch-jobs-container .search-jobs {
+    display: grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap: 20px;
+    /*justify-content: space-evenly; */
+  }
+  
+  .fetch-jobs-container .job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px;
+    width: 300px;
+    height: 350px;
+    transition: 400ms;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  
+  .job-card h3 {
+    color: #0b1013;
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .fetch-jobs-container .job-card:hover{
+    transform: scale(1.05);
+  }
+  .details{
+    max-height: 3rem;
+    overflow: hidden;
+    font-size: 1.1rem;
+  }
+  .details:hover,
+  .details:focus{
+    overflow: auto;
+  }
+  .job-pay {
+    color: #e74c3c;
+  }
+  @media (max-width: 940px) {
+    .jobs-list-container .jobs {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .jobs-list-container .jobs {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+  /* Add more styles as needed */
+  

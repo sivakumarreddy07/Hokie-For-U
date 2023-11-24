@@ -126,7 +126,7 @@ const fetchUserPickedJobsController = async (req, res) => {
 }
 
 const fetchUserPostedJobsController = async (req, res) => {
-  const { userEmail } = req.body;
+ const { userEmail } = req.body;
   const isPostedJob = true
   try {
 
@@ -140,7 +140,6 @@ const fetchUserPostedJobsController = async (req, res) => {
   } catch (error) {
     res.status(500).send('Error fetching user posted jobs');
   }
-
 }
 
 module.exports = {
