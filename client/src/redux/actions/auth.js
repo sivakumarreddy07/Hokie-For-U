@@ -125,6 +125,17 @@ export const getJobDetails = (request, navigate) => async (dispatch) => {
     }
 }
 
+export const getUserPickedJobs = (request, navigate) => async (dispatch) => {
+    try 
+    {
+        const {data} = await api.getUserPickedJobs(request);
+        return data;
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const getAllJobDetails = () => async (dispatch) => {
     try {
         const { data } = await api.getAllJobs();
