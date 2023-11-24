@@ -20,7 +20,7 @@ const FetchJobApp = () => {
   }
   return (
     <div className='fetch-jobs-container'>
-      <div className="search-jobs">
+      <div className="jobs">
       {jobs.map((job) => (
           <div key={job._id} className="job-card">
             <h3>{job.jobTitle}</h3>
