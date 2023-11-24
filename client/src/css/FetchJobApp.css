@@ -9,15 +9,16 @@
     padding-top: 6rem;
 } */
 .fetch-jobs-container{
+  display: flex;
+  flex-direction: column;
   max-width: 900px;
-  margin: 20px auto;
-  font-family: sans-serif;
-  padding: 2rem 5rem;
+  margin: 20px 10px;
+  font-family: sans-serif;  
   padding-top: 6rem;
 }
 
   
-.fetch-jobs-container .search-jobs {
+.fetch-jobs-container .jobs {
     display: grid;
     grid-template-columns:repeat(4, 1fr);
     gap: 20px;
