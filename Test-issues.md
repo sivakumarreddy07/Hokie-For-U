@@ -13,3 +13,12 @@ Already existing user with same email id is able to register into the applicatio
 
 ## Schema - Missing jobDate
 jobDate needs to be added to the schema
+
+# Hokie-For-U : Sprint-3 issues
+
+## Recent Jobs - issue
+Recent Jobs not getting updated
+
+## Pagination - Incorrect
+Incorrect Pagination Display on Job Search Results
+
