@@ -10,59 +10,74 @@
 } */
 .fetch-jobs-container{
   display: flex;
-  flex-direction: column;
-  max-width: 900px;
-  margin: 20px 10px;
-  font-family: sans-serif;  
-  padding-top: 6rem;
+    flex-direction: column;
+    /* max-width: 900px; */
+    /* margin: 20px 10px; */
+    /* font-family: sans-serif; */
+    padding-top: 7rem;
+    padding-bottom: 1rem;
 }
 
+.fetch-jobs-container h1{
+  color: #861f41;
+  padding-left: 3rem;
+  text-align: left;
+  margin: 0;
+}
   
-.fetch-jobs-container .jobs {
-    display: grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap: 20px;
-    /*justify-content: space-evenly; */
+.fetch-jobs-container .jobs, .fetch-jobs-container .picked-jobs {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  gap: 1em;
+  justify-content: space-evenly;
+  overflow: auto;
   }
   
   .fetch-jobs-container .job-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: 20px;
-    width: 300px;
-    height: 350px;
-    transition: 400ms;
-    font-size: 1.3rem;
-    cursor: pointer;
+    width: 25%;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 1em;
+    height: 15rem;
+    min-width: 450px;
+    justify-content: space-between;
+    border: 1px solid #EAEDF4;
+    border-radius: 10px;
+    transition: 1s ease;
   }
   
+  .job-card:hover {
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
   .job-card h3 {
     color: #0b1013;
     font-size: 1.7rem;
     margin-bottom: 0.5rem;
   }
   
-  .fetch-jobs-container .job-card:hover{
-    transform: scale(1.05);
-  }
-  .details{
-    max-height: 3rem;
-    overflow: hidden;
-    font-size: 1.1rem;
-  }
-  .details:hover,
-  .details:focus{
+  .job-description{
+    text-align: justify;
+    max-height: 2.5rem;
     overflow: auto;
   }
-  .job-pay {
-    color: #e74c3c;
+
+
+  .picked-jobs .job-card{
+    height: 17rem;
   }
+
+  .posted-user{
+    align-self: flex-start;
+  }
+  
   @media (max-width: 940px) {
     .jobs-list-container .jobs {
       grid-template-columns: 1fr;
