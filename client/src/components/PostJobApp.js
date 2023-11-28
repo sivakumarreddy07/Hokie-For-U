@@ -11,6 +11,7 @@ const InitState = {
   jobLocation: "",
   jobDescription: "",
   jobPay: "",
+  jobDate:"",
   contactNumber: "",
   postedUser: []
 }
@@ -38,7 +39,7 @@ const PostJobApp = (props) => {
 
     console.log(updatedForm);
 
-    if (sForm.jobDescription !== "" && sForm.jobLocation !== "" && sForm.jobTitle !== "" && sForm.jobLocation !== "" && sForm.contactNumber !== "") {
+    if (sForm.jobDescription !== "" && sForm.jobLocation !== "" && sForm.jobDate!=="" && sForm.jobTitle !== "" && sForm.jobLocation !== "" && sForm.contactNumber !== "") {
       dispatch(postJob(updatedForm, nagivate));
       setsForm(InitState);
       setShowNotification(true);
@@ -73,6 +74,10 @@ const PostJobApp = (props) => {
         <div className="input-job">
           <span className="details">Contact Details</span>
           <input type="tel" name="contactNumber" placeholder="Enter Phone Number" value={sForm.contactNumber} onChange={handleChange} required />
+        </div>
+        <div className="input-job">
+          <span className="details">Job Date</span>
+          <input type="date" placeholder="Choose a Date" name="jobDate" value={sForm.jobDate} onChange={handleChange} required />
         </div>
         <div className="input-job">
           <span className="details">Job Location</span>

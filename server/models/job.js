@@ -5,6 +5,7 @@ const jobSchema = mongoose.Schema({
   jobDescription: { type: String, required: true },
   contactNumber: { type: String, required: true },
   jobLocation: { type: String, required: true },
+  jobDate: {type: Date, required: true},
   jobPay: { type: String, required: false },
   postedUser: { type: Array, required: true },
   pickedUsers: { type: Array, required: false },
@@ -19,17 +20,19 @@ Job.addUserToJob = async (userEmail, jobId, isPostedJob) => {
   try {
     const job = await Job.findOne({ jobId });
 
+    
+
     if (!job) {
       throw new Error('Job not found');
     }
-
+    
       job.pickedUsers.push(userEmail);
-
+      
     await job.save();
     return job;
 
   } catch (error) {
-    throw new Error('Error adding user to job');
+    throw new Error(error);
   }
 };
 

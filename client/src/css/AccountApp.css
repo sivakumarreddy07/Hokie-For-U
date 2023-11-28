@@ -3,7 +3,7 @@
     padding-top: 5rem;
 }
 
-.image-container{
+.image-container {
     background-image: url("../../public/images/homepage9.gif");
     width: 100%;
     height: 400px;
@@ -11,7 +11,8 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    -webkit-filter: grayscale(40%); /* Safari 6.0 - 9.0 */
+    -webkit-filter: grayscale(40%);
+    /* Safari 6.0 - 9.0 */
     filter: grayscale(40%);
 }
 
@@ -39,7 +40,7 @@
     margin: 0;
 }
 
-.search-buttons{
+.search-buttons {
     display: flex;
     width: 100%;
     gap: 1rem;
@@ -138,7 +139,8 @@
 }
 
 .job-posted-user,
-.job-description {
+.job-description,
+.job-date {
     align-self: flex-start;
 }
 

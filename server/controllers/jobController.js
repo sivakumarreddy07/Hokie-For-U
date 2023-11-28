@@ -4,15 +4,15 @@ const User = require("../models/user")
 const emailController = require("../controllers/emailController")
 
 const postJobController = async (req, res) => {
-  const { jobTitle, jobDescription, contactNumber, jobLocation, jobPay, postedUser } = req.body;
+  const { jobTitle, jobDescription, contactNumber, jobLocation, jobPay, jobDate, postedUser } = req.body;
   const jobId = uuidv4()
   const isPostedJob = true
   const userEmail = postedUser[0]
   try {
-    if (jobTitle === "" || jobDescription === "" || contactNumber === "" || jobLocation === "") {
+    if (jobTitle === "" || jobDescription === "" || contactNumber === "" || jobLocation === "" || jobDate === "") {
       return res.status(400).json({ message: "Invalid field!" })
     }
-    const result = await Job.create({ jobTitle, jobDescription, contactNumber, jobLocation, jobPay, jobId, postedUser })
+    const result = await Job.create({ jobTitle, jobDescription, contactNumber, jobLocation, jobDate, jobPay, jobId, postedUser })
 
     User.addJobToUser(userEmail, jobId, isPostedJob)
       .then((user) => {
@@ -33,6 +33,7 @@ const postJobController = async (req, res) => {
             <strong>Job Description: </strong>${jobDescription}<br>
             <strong>Job Pay: </strong>${jobPay}<br>
             <strong>Job Location: </strong>${jobLocation}<br>
+            <strong>Job Date: </strong>${jobDate}<br>
             <strong>Contact Information: </strong>${contactNumber}
         </div>
         <div>
@@ -56,7 +57,6 @@ const pickJobController = async (req, res) => {
   console.log(req);
   const { userEmail, jobId } = req.body;
   const isPostedJob = false
-  console.log(userEmail+' '+jobId);
   try {
     if (userEmail === "" || jobId === "") {
       return res.status(400).json({ message: "Invalid field!" })
@@ -78,12 +78,15 @@ const pickJobController = async (req, res) => {
         console.error('Error:', error);
       });
       const job = await Job.findOne({ jobId });
+      const user = await User.findOne({email: userEmail });
       const toAddress = job.postedUser[0];
       const subject = 'Your job has been picked!!!';
       const content = `<html><head></head><body>
       <p>The job you have posted (${job.jobTitle}) has been picked</p>
       <h2>Picked User Details:</h2>
-      <strong>User Email: </strong>${job.pickedUsers}<br><br><br>
+      <strong>Name: </strong>${user.firstName} ${user.lastName}<br>
+      <strong>Email: </strong>${userEmail}<br>
+      <strong>Contact Details: </strong>${user.phoneNumber}<br><br><br>
       Regards,<br>
       HokieForU
       </body></html>`;

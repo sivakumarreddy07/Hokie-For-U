@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { pickJob } from "../redux/actions/auth";
 import { getAllJobDetails } from "../redux/actions/auth";
 import ReactPaginate from 'react-paginate';
+import { format } from 'date-fns';
 
 const AccountApp = () => {
   const dispatch = useDispatch();
@@ -31,8 +32,7 @@ const AccountApp = () => {
   }
 
   const filteredJobs = jobs.filter(
-    (job) =>
-      job.postedUser[0] !== userEmail &&
+    (job) => job.postedUser[0] !== userEmail && !job.pickedUsers.includes(userEmail) &&
       (job.jobTitle.toLowerCase().includes(jobTitleSearchQuery.toLowerCase()) &&
         job.jobLocation.toLowerCase().includes(jobLocationSearchQuery.toLowerCase()) &&
         job.jobDescription.toLowerCase().includes(jobDescriptionSearchQuery.toLowerCase()))
@@ -47,6 +47,16 @@ const AccountApp = () => {
   const paginate = ({ selected }) => {
     setCurrentPage(selected + 1);
   };
+
+  const dateFormat = (date) => {
+    if (!date) {
+      return "Not Provided"
+    }
+    const currentDate = new Date(date)
+    const nextDayDate = new Date(currentDate);
+    nextDayDate.setDate(currentDate.getDate() + 1);
+    return nextDayDate.toLocaleDateString()
+  }
 
   const handleOnSubmit = (e, jobId) => {
     e.preventDefault();
@@ -104,6 +114,9 @@ const AccountApp = () => {
               <div className="job-pay">
                 <div>Pay&nbsp;<i className="fa fa-dollar-sign" />: {job.jobPay}/hour</div>
                 <div>Ph&nbsp;<i className="fa fa-phone-alt" />: {job.contactNumber}</div>
+              </div>
+              <div className="job-date">
+                Job Date&nbsp;<i className="fa fa-calendar" />:{dateFormat(job.jobDate)}
               </div>
               <div className="job-posted-user">
                 <strong>Posted By:</strong> {job.postedUser[0]}

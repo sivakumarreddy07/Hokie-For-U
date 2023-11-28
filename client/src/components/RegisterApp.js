@@ -40,11 +40,11 @@ const RegisterApp = (props) => {
         e.preventDefault();
         if (sForm.firstName !== "" && sForm.lastName !== "" && sForm.phoneNumber !== "" && sForm.password !== "" && sForm.confirmPassword !== "" && sForm.email !== "" && sForm.password === sForm.confirmPassword && sForm.password.length >= 4) {
             dispatch(signup(sForm, nagivate))
-            setsForm(InitState);
             setShowNotification(true);
                 setTimeout(() => {
                     setShowNotification(false);
                 }, 3000);
+                setsForm(InitState);
         }
     }
 
@@ -53,7 +53,7 @@ const RegisterApp = (props) => {
         <div className='register'>
             {showNotification && (
                 <Notification
-                    message="Profile Details Updated Successfully!"
+                    message="Registered Successfully!"
                     onClose={() => setShowNotification(false)}
                 />
             )}

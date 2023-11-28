@@ -48,7 +48,7 @@ const HeaderApp = ({ authenticated, handleLogOut }) => {
       
       {authenticated ?
         <div className='features-link'>
-          <p><i className='fa fa-bell' />&nbsp;<Link>Notifications</Link></p>
+          {/* <p><i className='fa fa-bell' />&nbsp;<Link>Notifications</Link></p> */}
           <p><i className='fa fa-home'/>&nbsp;<Link to="/hokieforu/account/home">Home</Link> </p>
           <p><i className='fa fa-suitcase' />&nbsp;<Link to="/hokieforu/account/myjobs">My Jobs</Link></p>
           <p><i className='fa fa-user' />&nbsp;<Link to="/hokieforu/account/myprofile" className='profile-button'>My Profile</Link></p>
