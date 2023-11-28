@@ -29,6 +29,18 @@ const FetchJobApp = () => {
     setPickedJobs(picked)
   }
 
+
+  const dateFormat=(date)=>{
+    if(!date){
+      return "Not Provided"
+    }
+    const currentDate = new Date(date)
+    const nextDayDate = new Date(currentDate);
+    nextDayDate.setDate(currentDate.getDate() + 1);
+    return nextDayDate.toLocaleDateString()
+  }
+
+
   return (
     <div className='fetch-jobs-container'>
       <h1>Posted Jobs</h1>
@@ -37,14 +49,18 @@ const FetchJobApp = () => {
           <div key={job._id} className="job-card">
             <h2>{job.jobTitle}</h2>
             <div class="job-location"><i class="fa fa-map-marker-alt"></i>&nbsp;{job.jobLocation}</div>
+            
+            <div className='job-pay'>
+              <div>
+                Pay&nbsp;<i class="fa fa-dollar-sign"></i>: {job.jobPay}/hour
+              </div>
+              <div className="job-date">
+                Job Date&nbsp;<i className="fa fa-calendar" />:{dateFormat(job.jobDate)}
+                </div>
+            </div>
             <div class="job-description">
               <strong>Job Details: </strong>
               {job.jobDescription}
-            </div>
-            <div className='job-pay'>
-              <div>
-                Pay&nbsp;<i class="fa fa-dollar-sign"></i>: 10/hour
-              </div>
             </div>
           </div>
         ))}
@@ -60,7 +76,11 @@ const FetchJobApp = () => {
                 <div>Pay&nbsp;<i className="fa fa-dollar-sign" />: {job.jobPay}/hour</div>
                 <div>Ph&nbsp;<i className="fa fa-phone-alt" />: {job.contactNumber}</div>
               </div>
-              <div className='posted-user'>
+              
+              <div className="job-date">
+                Job Date&nbsp;<i className="fa fa-calendar" />:{dateFormat(job.jobDate)}
+                </div>
+                <div className='posted-user'>
                 <strong>Posted By:</strong> {job.postedUser[0]}
               </div>
               <div className="job-description">
