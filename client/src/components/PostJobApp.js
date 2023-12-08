@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { postJob } from "../redux/actions/auth";
+import { postJob, updateJobDetails } from "../redux/actions/auth";
+import { getJobDetailsById } from "../redux/actions/auth";
+import { useLocation } from "react-router-dom";
 import AuthGuard from "./AuthGuard";
 import Notification from "./Notification";
 import "../css/PostJobApp.css"
@@ -11,7 +13,7 @@ const InitState = {
   jobLocation: "",
   jobDescription: "",
   jobPay: "",
-  jobDate:"",
+  jobDate: "",
   contactNumber: "",
   postedUser: []
 }
@@ -22,11 +24,38 @@ const PostJobApp = (props) => {
   const [sForm,
     setsForm] = useState(InitState)
   const [showNotification, setShowNotification] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const jobId = searchParams.get('jobId');
 
   const handleChange = (e) => setsForm({
     ...sForm,
     [e.target.name]: e.target.value
   });
+
+  async function fetchJobData() {
+    const response = await dispatch(getJobDetailsById({ jobId }, nagivate));
+    setsForm(response, () => console.log(sForm));
+
+  }
+
+  useEffect(() => {
+    if (jobId) {
+      fetchJobData()
+    }
+  }, [jobId]);
+
+  useEffect(() => {
+    if (sForm.jobDate) {
+      const currentDate = new Date(sForm.jobDate);
+      setsForm((prevForm) => ({
+        ...prevForm,
+        jobDate: currentDate.toISOString().split('T')[0],
+      }));
+    }
+  }, [sForm.jobDate]);
 
   // Handle form submission
   function handleOnSubmit(e) {
@@ -37,9 +66,7 @@ const PostJobApp = (props) => {
       postedUser: [userEmail],
     };
 
-    console.log(updatedForm);
-
-    if (sForm.jobDescription !== "" && sForm.jobLocation !== "" && sForm.jobDate!=="" && sForm.jobTitle !== "" && sForm.jobLocation !== "" && sForm.contactNumber !== "") {
+    if (sForm.jobDescription !== "" && sForm.jobLocation !== "" && sForm.jobDate !== "" && sForm.jobTitle !== "" && sForm.jobLocation !== "" && sForm.contactNumber !== "") {
       dispatch(postJob(updatedForm, nagivate));
       setsForm(InitState);
       setShowNotification(true);
@@ -47,16 +74,46 @@ const PostJobApp = (props) => {
         setShowNotification(false);
       }, 3000);
     }
-
   };
+  function handleOnUpdate(e) {
+    e.preventDefault();
+    const userEmail = JSON.parse(localStorage.getItem("user_info")).result.email;
+    const updatedForm = {
+      jobId: jobId,
+      jobTitle: sForm.jobTitle,
+      jobDescription: sForm.jobDescription,
+      contactNumber: sForm.contactNumber,
+      jobDate: sForm.jobDate,
+      jobLocation: sForm.jobLocation,
+      jobPay: sForm.jobPay,
+      postedUser: [userEmail],
+    };
+
+    if(sForm.jobDescription !== "" && sForm.jobLocation !== "" && sForm.jobDate !== "" && sForm.jobTitle !== "" && sForm.jobLocation !== "" && sForm.contactNumber !== "") {
+      dispatch(updateJobDetails(updatedForm,nagivate));
+      setsForm(InitState)
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
+    }
+    else{
+      alert("Please fill all the details");
+    }
+  }
   return (
     <div className="app-postjob">
       {showNotification && (
-          <Notification
-            message="Job Posted Successfully!"
-            onClose={() => setShowNotification(false)}
-          />
-        )}
+        <Notification
+          message="Job Posted Successfully!"
+          onClose={() => setShowNotification(false)}
+        />
+      )}{showAlert && (
+        <Notification
+          message="Job Updated Successfully!"
+          onClose={() => setShowAlert(false)}
+        />
+      )}
       <div className="postjob-img">
         <img src="/images/bg-2.jpeg" alt="" />
       </div>
@@ -87,7 +144,12 @@ const PostJobApp = (props) => {
           <span className="details">Job Pay</span>
           <input type="number" name="jobPay" placeholder="Enter Job Pay" value={sForm.jobPay} onChange={handleChange} required />
         </div>
-        <button type="submit" className="post-button">Post the job</button>
+        {
+          jobId ?
+            <input type="button" onClick={handleOnUpdate} className="post-button" value='Update' /> :
+            <button type="submit" className="post-button">Post the Job</button>
+        }
+
       </form>
     </div>
   );

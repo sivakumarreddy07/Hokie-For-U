@@ -125,6 +125,40 @@ export const getJobDetails = (request, navigate) => async (dispatch) => {
     }
 }
 
+export const getJobDetailsById= (request, navigate) => async (dispatch) => {
+    try 
+    {
+        const {data} = await api.getJobById(request);
+        return data;
+    } 
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateJobDetails= (request,navigate) => async(dispatch)=>{
+    try {
+        const { data } = await api.editJobDetails(request);
+        console.log(request)
+        dispatch({ type: 'REGISTER', data });
+        navigate("/hokieforu/account/post-a-job");
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteJobDetails= (request,navigate) => async(dispatch)=>{
+    try {
+        const { data } = await api.deleteJobDetails(request);
+        console.log(request)
+        navigate("/hokieforu/account/myjobs");
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const getUserPickedJobs = (request, navigate) => async (dispatch) => {
     try 
     {
@@ -150,7 +184,6 @@ export const pickJob = (request, navigate) => async (dispatch) => {
         const { data } = await api.pickJob(request);
         console.log(request)
         dispatch({ type: '', data })
-        alert('Job Picked Successfully');
         navigate("/hokieforu/account/home");
     } catch (error) {
         console.log(error);

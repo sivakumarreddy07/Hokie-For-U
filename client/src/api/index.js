@@ -27,6 +27,9 @@ export const updateUserDetails = (data) => API.post('/users/update',data)
 
 export const postJob = (data) => API.post(`/jobs/post-job`,data)
 export const getJob = (data) => API.post(`/jobs/user-posted-jobs`,data)
+export const getJobById = (data) => API.post(`/jobs/fetch-jobById`,data)
+export const editJobDetails = (data) => API.post(`/jobs/edit-job-details`,data)
+export const deleteJobDetails = (data) => API.post(`/jobs/delete-job-details`,data)
 
 export const getUserPickedJobs = (data) => API.post(`/jobs/user-picked-jobs`,data)
 export const getAllJobs = (data) => API.get(`/jobs/fetch-jobs`)

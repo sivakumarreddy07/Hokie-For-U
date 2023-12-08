@@ -57,12 +57,26 @@
         0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-  .job-card h3 {
-    color: #0b1013;
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
+  .job-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
+  .job-title a{
+    text-decoration: none;
+    color: #861f41;
+  }
+
+  .editAndDeleteIcons{
+    display: flex;
+    gap: 1rem;
+  }
+
+  .location-job{
+    align-self: flex-start;
+  }
+
   .job-description{
     text-align: justify;
     max-height: 2.5rem;
