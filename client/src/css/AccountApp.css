@@ -1,0 +1,200 @@
+.app-account {
+    height: 90%;
+    padding-top: 5rem;
+}
+
+.image-container {
+    background-image: url("../../public/images/homepage9.gif");
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    -webkit-filter: grayscale(40%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(40%);
+}
+
+.search-jobs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 50%;
+    padding: 2rem;
+    position: relative;
+    border: 1px solid #ebedf4;
+    border-radius: 10px;
+    top: -80px;
+    left: 25%;
+    background-color: #ffffff;
+    box-shadow: 0px 16px 33px rgba(27, 32, 38, 0.05);
+}
+
+.search-jobs p {
+    color: #861f41;
+    font-weight: bolder;
+    font-size: x-large;
+    margin: 0;
+}
+
+.search-buttons {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.search-buttons input[type=text] {
+    width: 80%;
+    outline: none;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.search-buttons input[type=text]:focus {
+    border-color: #861f41;
+}
+
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.buttons a {
+    border-radius: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    background-color: #861f41;
+    border: #861f41;
+    color: azure;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+
+.buttons a:active {
+    transform: translateY(4px);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+    /* Lowering the shadow */
+}
+
+
+.jobs-container {
+    padding: 0rem 1rem;
+}
+
+.jobs-container h1 {
+    color: #861f41;
+    padding-left: 3rem;
+    text-align: left;
+    margin: 0;
+}
+
+.app-jobs {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    gap: 1em;
+    justify-content: space-evenly;
+    overflow: auto;
+}
+
+.job-grid {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: fit-content;
+    padding: 1em;
+    height: 20rem;
+    min-width: 450px;
+    justify-content: space-between;
+    border: 1px solid #EAEDF4;
+    border-radius: 10px;
+    transition: 1s ease;
+}
+
+.job-grid:hover {
+    -webkit-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    transform: scale(1.02);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.job-pay {
+    display: flex;
+    justify-content: space-between;
+}
+
+.job-posted-user,
+.job-description,
+.job-date {
+    align-self: flex-start;
+}
+
+.job-description {
+    text-align: justify;
+    max-height: 2.5rem;
+    overflow: auto;
+}
+
+.apply-btn button {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    background-color: #861f41;
+    border: #861f41;
+    color: azure;
+    transition: all 0.5s;
+    text-decoration: none;
+    border-radius: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+.apply-btn button:active,
+.apply-btn a:active {
+    transform: translateY(4px);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+
+ul {
+    list-style: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination .page-number {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pagination .page-number:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.pagination .active {
+    background-color: #861f41;
+    color: white;
+    border-radius: 5px;
+}

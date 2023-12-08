@@ -1,0 +1,237 @@
+.app-home {}
+
+.parallax-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../../public/images/background.png');
+  height: 100vh;
+  width: 100vw;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-bg p {
+  font-family: 'Luckiest Guy';
+  font-size: xx-large;
+  color: azure;
+}
+
+.cta-button {
+  width: fit-content;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  outline: none;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  border: .1rem solid var(--default-text-color);
+  padding: 1rem;
+  transition: all 0.5s;
+  background-color: azure;
+}
+
+.cta-button:hover {
+  border: .1rem solid var(--default-text-color);
+  background-color: #861f41;
+}
+
+.cta-button a {
+  text-decoration: none;
+  position: relative;
+  transition: 0.5s;
+  color: #861f41;
+}
+
+.cta-button a:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.cta-button:hover a {
+  padding-right: 1rem;
+  color: azure;
+}
+
+.cta-button:hover a:after {
+  opacity: 1;
+  right: 0;
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+.app-intro {
+  background-color: white;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rem 0rem;
+  gap: 1rem;
+}
+
+.story1,
+.story2,
+.story3 {
+  display: flex;
+  gap: 1rem;
+  padding: 3rem 0rem;
+  align-items: center;
+  color: #861f41;
+}
+
+.story-text {
+  font-family: 'Comfortaa', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  font-size: x-large;
+  height: fit-content;
+  width: 30vw;
+  background-color: aliceblue;
+  border: black;
+}
+
+.story-image {
+  height: 300px;
+  width: 500px;
+
+}
+
+.story-text .user-type {
+  font-weight: bolder;
+}
+
+.footer {
+  background-color: #24262b;
+  padding: 1rem 0rem;
+}
+
+.container {
+  max-width: 1170px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  width: 25%;
+  padding: 0 15px;
+  text-align: left;
+}
+
+.footer-col h4 {
+  font-size: 18px;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin-bottom: 35px;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-col h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: rgb(134, 31, 65);
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
+}
+
+ul {
+  list-style: none;
+}
+
+.footer-col ul {
+  padding: 0rem;
+}
+
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 300;
+  color: #bbbbbb;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color: #ffffff;
+  padding-left: 8px;
+}
+
+.footer-col .social-links a {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px 0;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+  color: #24262b;
+  background-color: #ffffff;
+}
+
+.copyright {
+  color: #bbbbbb;
+  font-size: 16px;
+  padding: 1rem 0rem;
+  font-weight: 300;
+}
+
+
+/*responsive*/
+@media(max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+
+  .story1,
+  .story2,
+  .story3 {
+    flex-direction: column;
+  }
+
+  .story-text {
+    font-size: small;
+    width: 300px;
+  }
+
+  .story-image {
+    height: 200px;
+    width: 300px;
+  }
+
+}
+
+@media(max-width: 574px) {
+  .footer-col {
+    width: 100%;
+  }
+}
