@@ -10,6 +10,35 @@ https://drive.google.com/file/d/1q8yrPTgCH2WUWCMrz3vLuVFYT3wJOhJO/view?usp=shari
 
 ## Screenshots of the Application
 
+### Home Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%201.png)
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%202.png)
+
+### Registration Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%203.png)
+
+### Login Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%204.png)
+
+### Dashboard Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%205.png)
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%206.png)
+
+### My Jobs Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%207.png)
+
+### My Profile Page
+
+![alt text](https://github.com/sivakumarreddy07/hokie-for-u/blob/dev-akshay/Files/screenshots/Screenshot%208.png)
+
+
 ### _**IMPORTANT NOTES**_ - 
 This project does not have a mongoDB connection setup.
 - local development: create a config file (make sure to name it config.js) in the config folder, which exports your db.uri connection. An example is provided, config/config.example.js. This file will be ignored by git so your db credentials will be kept safe when the app is deployed.
