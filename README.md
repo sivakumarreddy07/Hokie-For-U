@@ -5,6 +5,11 @@
 
 This application is confined to Virginia tech students. VT students excel in a lot of aspects in life, this application will let them help our neighborhood communities in providing services. These services can be anything from household chores, babysitting, grocery pickup to tutoring. This application indirectly helps hokies find a job as well as contribute to the betterment of neighborhood communities. With a user-friendly interface , we connect hokies with surrounding communities. Any person in the community can post a job to the Hokie for U application, this job can be picked by hokies who are willing to help and possess the skills. The application provides a contact feature that helps people connect and discuss anything related to these jobs. On a high-level the application includes the following main features: Users may order services at their convenience, specify their needs, and receive confirmation and updates with the help of the app’s integrated booking and scheduling system. Users can also rate the service providers. For scheduled service visits, users receive notifications and reminders, guaranteeing a smooth and on-time experience.
 
+## Presentation Link
+https://drive.google.com/file/d/1q8yrPTgCH2WUWCMrz3vLuVFYT3wJOhJO/view?usp=sharing
+
+## Screenshots of the Application
+
 ### _**IMPORTANT NOTES**_ - 
 This project does not have a mongoDB connection setup.
 - local development: create a config file (make sure to name it config.js) in the config folder, which exports your db.uri connection. An example is provided, config/config.example.js. This file will be ignored by git so your db credentials will be kept safe when the app is deployed.
