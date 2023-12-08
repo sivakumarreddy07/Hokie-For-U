@@ -84,9 +84,10 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 #### `client` - Holds the client application
 - #### `public` - This holds all of our static files
 - #### `src`
-    - #### `assets` - This folder holds assets such as images, docs, and fonts
-    - #### `components` - This folder holds all of the different components that will make up our views
-    - #### `views` - These represent a unique page on the website i.e. Home or About. These are still normal react components
+    - #### `api` - This folder holds all of the api details
+    - #### `components` - This folder holds all of the different components
+    - #### `css` - This folder holds all the CSS properties of the web components
+    - #### `redux` - This folder holds all the code for integration between frontend and backend
     - #### `App.js` - This is what renders all of our browser routes and different views
     - #### `index.js` - This is what renders the react app by rendering App.js, should not change
 - #### `package.json` - Defines npm behaviors and packages for the client
